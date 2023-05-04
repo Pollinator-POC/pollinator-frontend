@@ -28,7 +28,7 @@ const App = () => {
             });
 
     useEffect(() => {
-        const interval = setInterval(async () => getChargePoints(), 10);
+        const interval = setInterval(async () => getChargePoints(), 3000);
         return () => clearInterval(interval);
     }, []);
 
