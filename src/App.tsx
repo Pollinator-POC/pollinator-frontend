@@ -1,5 +1,6 @@
 import React from "react";
 import {useState, useEffect} from "react";
+import getChargePoints from "./api";
 
 const styles: {[key: string]: React.CSSProperties} = {
     table: {
@@ -16,19 +17,9 @@ const styles: {[key: string]: React.CSSProperties} = {
 
 const App = () => {
     const [chargePoints, setChargePoints] = useState([]);
-    const getChargePoints = async () =>
-        await fetch("http://localhost:8080/charge_point_live_status")
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                setChargePoints(data);
-            })
-            .catch((err) => {
-                console.log(err.message);
-            });
 
     useEffect(() => {
-        const interval = setInterval(async () => getChargePoints(), 3000);
+        const interval = setInterval(async () => getChargePoints(setChargePoints), 3000);
         return () => clearInterval(interval);
     }, []);
 
