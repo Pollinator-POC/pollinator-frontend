@@ -14,7 +14,7 @@ describe("ChargePoint", () => {
     beforeEach(() => {
         jest.resetAllMocks();
         jest.clearAllMocks();
-    })
+    });
 
     it("should retrieve charge points", () => {
         global.fetch = jest.fn().mockImplementationOnce(() => {
@@ -34,7 +34,7 @@ describe("ChargePoint", () => {
     it("should not retrieve charge points", () => {
         global.fetch = jest.fn().mockImplementationOnce(() => {
             return new Promise((resolve, reject) => {
-                reject(new Error('Some error'));
+                reject(new Error("Some error"));
             });
         });
 

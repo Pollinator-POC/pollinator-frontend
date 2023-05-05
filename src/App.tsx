@@ -1,21 +1,21 @@
 import React from "react";
 import {useState, useEffect} from "react";
 import getChargePoints from "./api";
+import {Table} from "./components/Table";
+import {ColumnDefinitionType} from "./components/types";
 
-const styles: {[key: string]: React.CSSProperties} = {
-    table: {
-        borderCollapse: "collapse",
-        border: "1px solid",
-        width: "50%",
-        padding: "8px"
+const columns: ColumnDefinitionType<any, any>[] = [
+    {
+        key: "chargePointId",
+        header: "Charging Point Id"
     },
-    th: {
-        border: "1px solid",
-        padding: "8px"
+    {
+        key: "status",
+        header: "Status"
     }
-};
+];
 
-const App = () => {
+const App: React.FC = () => {
     const [chargePoints, setChargePoints] = useState([]);
 
     useEffect(() => {
@@ -23,24 +23,7 @@ const App = () => {
         return () => clearInterval(interval);
     }, []);
 
-    return (
-        <table style={styles.table}>
-            <thead>
-                <tr>
-                    <th style={styles.th}>Charging Point Id</th>
-                    <th style={styles.th}>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {chargePoints.map((cp) => (
-                    <tr key={cp.charge_point_id}>
-                        <th style={styles.th}>{cp.charge_point_id}</th>
-                        <th style={styles.th}>{cp.status}</th>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
-    );
+    return <Table data={chargePoints} columns={columns} />;
 };
 
 export default App;
